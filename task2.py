@@ -1,20 +1,24 @@
+'''
+input : log_file
+output : percentage duration of each unique process id
+'''
+
 import copy
 import re
 import datetime
-import copy
 import configuration as conf
-import re
+
 
 import matplotlib.dates as md
 import matplotlib.pyplot as plt
 from datetime import datetime
 import math
 import time
-import copy
+
 
 
 def perpid(fname , process):
-    
+    #open ,read and extract the process id information from log-file
     infile =open(fname,"r")
     lines= infile.readlines()
     temp = open("temp.txt",'w+')
@@ -34,7 +38,8 @@ def perpid(fname , process):
     pid=[]
 
     olines=temp.readlines()
-
+    
+    #extract all process-ids into list
     for i in olines:
         i=i.strip()
         if re.match(r'^[0-9].*',i):
@@ -42,7 +47,8 @@ def perpid(fname , process):
             pid.append(i.split(' ')[0])
 
     print("total pid under ps command : ",len(pid))
-
+    
+    #get unique process-ids
     upid = [] 
     for x in pid:
         if x not in upid:
@@ -50,7 +56,7 @@ def perpid(fname , process):
                 
     print("total count of unqiue pid is : ",len(upid))
 
-
+    
     freq = {} 
     for i in pid:
         if i in upid:
@@ -69,7 +75,8 @@ def perpid(fname , process):
 
 
     res=open("result.txt",'r')
-    #altercode
+
+    #altercode-->percentage duration of each process given in list
     a={}
     for i in process:
          a[i] = []
@@ -80,7 +87,7 @@ def perpid(fname , process):
             if  j in i and i.split(' ')[0] not in a[j]:
                 a[j].append(i.split(' ')[0])
     
-
+    
     for j in process:     
         res=open("result.txt",'r')
         print("\npercentage duration of process ",j," : ")
