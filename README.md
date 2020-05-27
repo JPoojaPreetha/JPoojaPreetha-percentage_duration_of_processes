@@ -1,8 +1,10 @@
 # JPoojaPreetha-percentage_duration_of_processes
 
 
-For given log_file calculate:
-  a)total pid
-  b)unique pid
-  c)percentage duration of processes given as a list by user
+From given log_file calculate:
+  a)total process ids
+  b)number of unique process ids
+  c)for each unique process id calculate percentage duration
+  
+  command used - "ps"
   
